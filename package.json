@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "NODE_ENV=development nodemon",
     "build": "yarn build:next && yarn build:server",
+    "build:prod": "NODE_ENV=production yarn build",
     "build:next": "next build",
     "build:server": "tsc --project tsconfig.server.json",
     "start": "node dist/index.js",
