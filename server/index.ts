@@ -1,15 +1,28 @@
 import Koa from 'koa'
 import Router from 'koa-router'
+import next from 'next'
 
-const server = new Koa()
-const router = new Router()
+const dev = process.env.NODE_ENV !== 'production'
+const app = next({ dev })
+const handle = app.getRequestHandler()
 
-router.get('/', (ctx) => {
-    ctx.body = 'hello'
-})
+app.prepare().then(() => {
 
-server.use(router.routes())
+    const server = new Koa()
+    const router = new Router()
+    router.all('(.*)', async (ctx) => {
+        await handle(ctx.req, ctx.res)
+        ctx.respond = false
+    })
 
-server.listen(3100, () => {
-    console.log('> Ready on http://localhost:3000')
+    server.use(async (ctx, next) => {
+        ctx.res.statusCode = 200
+        await next()
+    })
+
+    server.use(router.routes())
+    server.listen(3100, () => {
+        console.log('> Ready on http://localhost:3000')
+    })
+
 })
