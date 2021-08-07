@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "start:server": "yarn ts-node --project tsconfig.server.json server/index.ts",
     "lint": "next lint"
   },
   "dependencies": {
@@ -13,7 +14,8 @@
     "koa-router": "^10.0.0",
     "next": "11.0.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "ts-node": "^10.1.0"
   },
   "devDependencies": {
     "@types/koa": "^2.13.4",
