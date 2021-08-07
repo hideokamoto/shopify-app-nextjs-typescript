@@ -16,13 +16,6 @@ const {
   HOST
 } = process.env as any
 
-console.log({
-  PORT,
-  NODE_ENV,
-  SCOPES,
-  HOST
-})
-
 const port = parseInt(PORT, 10) || 8081;
 const dev = NODE_ENV !== 'production'
 const app = next({ dev })
