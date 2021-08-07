@@ -3,13 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "NODE_ENV=development nodemon",
+    "build": "yarn build:next && yarn build:server",
+    "build:next": "next build",
+    "build:server": "tsc --project tsconfig.server.json && cp server/index.js dist/",
+    "start": "node dist/index.js",
+    "start:prod": "NODE_ENV=production node dist/index.js",
+    "start:next": "next start",
     "start:server": "yarn ts-node --project tsconfig.server.json server/index.ts",
     "lint": "next lint"
   },
   "dependencies": {
+    "@shopify/koa-shopify-auth": "^4.1.4",
+    "@shopify/shopify-api": "^1.4.1",
+    "dotenv": "^10.0.0",
     "koa": "^2.13.1",
     "koa-router": "^10.0.0",
     "next": "11.0.1",
@@ -18,11 +25,14 @@
     "ts-node": "^10.1.0"
   },
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
     "@types/koa": "^2.13.4",
     "@types/koa-router": "^7.4.4",
+    "@types/node": "^16.4.13",
     "@types/react": "17.0.16",
     "eslint": "7.32.0",
     "eslint-config-next": "11.0.1",
+    "nodemon": "^2.0.12",
     "typescript": "4.3.5"
   }
 }
